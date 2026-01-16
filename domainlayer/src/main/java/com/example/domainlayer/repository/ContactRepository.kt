@@ -8,5 +8,6 @@ interface ContactRepository {
 
     suspend fun get(id: String): Result<Contact>
     suspend fun updateName(id: String, name: String): Result<Contact>
+    suspend fun updateNumber(id: String, name: String): Result<Contact>
     suspend fun delete(id: String): Result<Contact>
 }

@@ -1,6 +1,7 @@
 package com.example.uilayer.viewmodel
 
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.module.module.Account
@@ -14,15 +15,24 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AccountPageViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
     private val accountUseCase: AccountUseCase
 ) : ViewModel() {
 
-    private val _accountState = MutableStateFlow<com.example.domain.module.usecase.Result<Account>?>(null)
+
+    val accountId: String? = savedStateHandle["id"]
+
+
+    private val _accountState =
+        MutableStateFlow<com.example.domain.module.usecase.Result<Account>?>(null)
     val accountState: StateFlow<com.example.domain.module.usecase.Result<Account>?> = _accountState
 
     fun getAccount(id: String) {
         viewModelScope.launch {
-            val result = accountUseCase.execute(AccountUseCaseParams(AccountUseCaseParams.GET_RECORD, id))
+            val result =
+                accountUseCase.execute(
+                    AccountUseCaseParams(AccountUseCaseParams.GET_RECORD, id)
+                )
             _accountState.emit(result)
         }
     }

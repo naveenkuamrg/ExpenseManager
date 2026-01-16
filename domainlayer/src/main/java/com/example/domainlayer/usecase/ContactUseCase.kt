@@ -31,6 +31,10 @@ class ContactUseCase @Inject constructor(private val repository: ContactReposito
                 repository.create( params.name)
             }
 
+            ContactUseCaseParams.UPDATE_CONTACT_NO -> {
+                repository.updateNumber(params.id!!, params.number!!)
+            }
+
             else -> {
                 Result.Failure(error = "not supported operation", 505)
             }
@@ -42,6 +46,7 @@ class ContactUseCase @Inject constructor(private val repository: ContactReposito
 data class ContactUseCaseParams(
     val id: String? = null,
     val name: String? = null,
+    val number: String? = null,
     val requestType: Int
 ) {
     companion object {
@@ -50,5 +55,6 @@ data class ContactUseCaseParams(
         const val UPDATE_CONTACT_NAME = 3
         const val DELETE_CONTACT = 5
         const val CREATE_CONTACT = 6
+        const val UPDATE_CONTACT_NO = 7
     }
 }

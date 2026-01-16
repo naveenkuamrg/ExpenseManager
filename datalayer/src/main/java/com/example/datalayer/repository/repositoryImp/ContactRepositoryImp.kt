@@ -20,6 +20,13 @@ class ContactRepositoryImp: ContactRepository {
         TODO("Not yet implemented")
     }
 
+    override suspend fun updateNumber(
+        id: String,
+        name: String
+    ): Result<Contact> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun delete(id: String): Result<Contact> {
         TODO("Not yet implemented")
     }
