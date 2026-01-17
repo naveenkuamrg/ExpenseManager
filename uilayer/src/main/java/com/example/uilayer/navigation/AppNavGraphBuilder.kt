@@ -1,5 +1,7 @@
 package com.example.uilayer.navigation
 
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -32,6 +34,7 @@ fun NavGraphBuilder.settingsNavGraph(
             })
     }
 }
+
 
 
 fun NavGraphBuilder.listNavGraph(navController: NavController) {
