@@ -27,7 +27,7 @@ class AccountUseCase @Inject constructor(private val repository: AccountReposito
 
             AccountUseCaseParams.CREATE_RECORD -> {
                 params.name ?: return Result.Failure("Name required", 400)
-                repository.create(params.name)
+                repository.create(params.name,params.balance ?: 0.0)
             }
 
             AccountUseCaseParams.UPDATE_RECORD_NAME -> {
@@ -47,7 +47,7 @@ data class AccountUseCaseParams(
     val requestType: Int,
     val id: String? = null,
     val name: String? = null,
-    val balance: Int? = null
+    val balance: Double? = null
 ) {
     companion object {
         const val GET_RECORD = 1

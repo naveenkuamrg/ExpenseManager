@@ -1,8 +1,8 @@
 package com.example.domain.module.module
 
-data class ExpenseRecord(
+data class ExpenseTracker(
     val id: String,
-    val amount: Int,
+    val amount: Double,
     val note: String,
     val accountId: String,
     val contactId: String?,

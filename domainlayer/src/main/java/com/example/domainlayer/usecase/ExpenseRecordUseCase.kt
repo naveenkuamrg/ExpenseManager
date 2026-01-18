@@ -1,6 +1,6 @@
 package com.example.domainlayer.usecase
 
-import com.example.domain.module.module.ExpenseRecord
+import com.example.domain.module.module.ExpenseTracker
 import com.example.domain.module.module.PaymentType
 import com.example.domain.module.usecase.BaseUseCase
 import com.example.domain.module.usecase.Result
@@ -8,8 +8,8 @@ import com.example.domainlayer.repository.ExpenseRecordRepository
 import javax.inject.Inject
 
 class ExpenseRecordUseCase @Inject constructor(val repository: ExpenseRecordRepository) :
-    BaseUseCase<ExpenseRecord, ExpenseRecordAction>() {
-    override suspend fun executeBackground(params: ExpenseRecordAction): Result<ExpenseRecord> {
+    BaseUseCase<ExpenseTracker, ExpenseRecordAction>() {
+    override suspend fun executeBackground(params: ExpenseRecordAction): Result<ExpenseTracker> {
         return when (params) {
             is ExpenseRecordAction.Get -> {
                 repository.get(params.id)
@@ -20,7 +20,7 @@ class ExpenseRecordUseCase @Inject constructor(val repository: ExpenseRecordRepo
                     note = ""
                 }
                 repository.create(
-                    ExpenseRecord(
+                    ExpenseTracker(
                         id = "",
                         amount = params.amount,
                         note = note,
@@ -75,7 +75,7 @@ sealed class ExpenseRecordAction {
     data class Get(val id: String) : ExpenseRecordAction()
     data class Create(
         val name: String,
-        val amount: Int,
+        val amount: Double,
         val note: String?,
         val accountId: String,
         val contactId: String?,
