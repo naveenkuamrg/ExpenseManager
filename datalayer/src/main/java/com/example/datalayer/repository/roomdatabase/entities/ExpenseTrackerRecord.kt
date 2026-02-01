@@ -5,15 +5,15 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.example.domain.module.module.ExpenseTracker
-import com.example.domain.module.module.PaymentType
+import com.example.domain.module.module.TransactionType
 
 @Entity(
     tableName = "expense_tracker_record",
     foreignKeys = [
         ForeignKey(
             entity = AccountRecord::class,
-            parentColumns = arrayOf("account_id"),
-            childColumns = arrayOf("account_id"),
+            parentColumns = ["id"],
+            childColumns = ["account_id"],
             onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.CASCADE
         ),
@@ -21,6 +21,7 @@ import com.example.domain.module.module.PaymentType
 )
 data class ExpenseTrackerRecord(
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
     val id: Long = 0,
     val amount: Double,
     val note: String,
@@ -31,16 +32,16 @@ data class ExpenseTrackerRecord(
 )
 
 fun ExpenseTracker.toEntity(): ExpenseTrackerRecord {
-    val paymenet_type = when (paymentType) {
-        PaymentType.CREDIT -> {
+    val paymenet_type = when (transactionType) {
+        TransactionType.CREDIT -> {
             0
         }
 
-        PaymentType.TRANSFER -> {
+        TransactionType.TRANSFER -> {
             1
         }
 
-        PaymentType.DEBIT -> {
+        TransactionType.DEBIT -> {
             2
         }
     }
@@ -69,15 +70,15 @@ fun ExpenseTracker.toEntity(): ExpenseTrackerRecord {
 fun ExpenseTrackerRecord.toDomain(): ExpenseTracker {
     val paymenet_type = when (paymentType) {
         0 -> {
-            PaymentType.CREDIT
+            TransactionType.CREDIT
         }
 
         1 -> {
-            PaymentType.TRANSFER
+            TransactionType.TRANSFER
         }
 
         else -> {
-            PaymentType.DEBIT
+            TransactionType.DEBIT
         }
     }
     return ExpenseTracker(

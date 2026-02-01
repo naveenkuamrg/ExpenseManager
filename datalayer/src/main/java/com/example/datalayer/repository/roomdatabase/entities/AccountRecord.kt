@@ -10,7 +10,7 @@ import com.example.domain.module.module.Account
 @Entity(tableName = "account_record",)
 data class AccountRecord(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "account_id")
+    @ColumnInfo(name = "id")
     val id: Long = 0L,
     val name: String,
     val amount: Double

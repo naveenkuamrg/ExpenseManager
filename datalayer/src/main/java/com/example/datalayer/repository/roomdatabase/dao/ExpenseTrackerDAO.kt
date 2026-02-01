@@ -13,7 +13,7 @@ interface ExpenseTrackerDAO {
     @Query("Select * from expense_tracker_record")
     fun getAll(): List<ExpenseTrackerRecord>
 
-    @Query("select * from expense_tracker_record where id = (:id)")
+    @Query("select * from expense_tracker_record where id = :id")
     fun getByID(id: Long): ExpenseTrackerRecord
 
     @Insert
@@ -23,10 +23,8 @@ interface ExpenseTrackerDAO {
     fun delete(record: ExpenseTrackerRecord)
 
     @Update
-    suspend fun updateRecord(record: ExpenseTrackerRecord)
+     fun updateRecord(record: ExpenseTrackerRecord)
 
     @Query("UPDATE expense_tracker_record SET amount = (:amount) WHERE id = (:id)")
-    suspend fun updateRecordAmountByID(id: Double, amount: Double)
-
-
+     fun updateRecordAmountByID(id: Long, amount: Double)
 }

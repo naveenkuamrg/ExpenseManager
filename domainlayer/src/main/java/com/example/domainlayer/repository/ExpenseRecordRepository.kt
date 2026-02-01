@@ -1,7 +1,7 @@
 package com.example.domainlayer.repository
 
 import com.example.domain.module.module.ExpenseTracker
-import com.example.domain.module.module.PaymentType
+import com.example.domain.module.module.TransactionType
 import com.example.domain.module.usecase.Result
 
 interface ExpenseRecordRepository {
@@ -17,7 +17,7 @@ interface ExpenseRecordRepository {
     suspend fun updateNote(id: String, note: String): Result<ExpenseTracker>
     suspend fun updateAccount(id: String, accountId: String): Result<ExpenseTracker>
     suspend fun updateContact(id: String, contactId: String): Result<ExpenseTracker>
-    suspend fun updatePaymentType(id: String, paymentType: PaymentType): Result<ExpenseTracker>
+    suspend fun updatePaymentType(id: String, transactionType: TransactionType): Result<ExpenseTracker>
 
 
 }

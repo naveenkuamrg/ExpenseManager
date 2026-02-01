@@ -1,6 +1,6 @@
 package com.example.domain.module.module
 
-enum class PaymentType {
+enum class TransactionType {
     CREDIT,
     DEBIT,
     TRANSFER

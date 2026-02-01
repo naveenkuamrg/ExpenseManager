@@ -6,5 +6,5 @@ data class ExpenseTracker(
     val note: String,
     val accountId: String,
     val contactId: String?,
-    val paymentType: PaymentType
+    val transactionType: TransactionType
 )

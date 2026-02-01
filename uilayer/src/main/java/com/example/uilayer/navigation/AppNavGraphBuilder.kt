@@ -1,7 +1,5 @@
 package com.example.uilayer.navigation
 
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -13,7 +11,9 @@ import com.example.uilayer.compose.AccountDetailScreen
 import com.example.uilayer.compose.AccountScreen
 import com.example.uilayer.compose.ProfileScreen
 import com.example.uilayer.compose.SettingsScreen
-import com.example.uilayer.viewmodel.AccountPageViewModel
+import com.example.uilayer.compose.editscreens.TrackerEditScreen
+import com.example.uilayer.compose.listscreens.TrackerListPage
+import com.example.uilayer.viewmodel.AccountViewModel
 
 
 fun NavGraphBuilder.settingsNavGraph(
@@ -48,7 +48,7 @@ fun NavGraphBuilder.listNavGraph(navController: NavController) {
         }
 
         composable(Screen.TrackerList.route) {
-            TODO()
+            TrackerListPage()
         }
 
         composable(Screen.AccountList.route) {
@@ -81,14 +81,20 @@ fun NavGraphBuilder.detailNavGraph(navController: NavController) {
     composable(
         route = Screen.AccountDetail.route,
         arguments = listOf(navArgument("id") { type = NavType.StringType })
-    ) { backStackEntry ->
-        val viewModel: AccountPageViewModel = hiltViewModel(backStackEntry)
-
+    ) {
         AccountDetailScreen(
-            viewModel = viewModel,
             onBack = { navController.popBackStack() }
         )
     }
 
 }
 
+
+fun NavGraphBuilder.editNavGraph(navController: NavController) {
+    composable(
+        route = Screen.TrackerEdit.route,
+        arguments = listOf(navArgument("id"){type = NavType.StringType})
+    ) {
+        TrackerEditScreen(navController)
+    }
+}

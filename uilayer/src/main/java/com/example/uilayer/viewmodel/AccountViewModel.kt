@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AccountPageViewModel @Inject constructor(
+class AccountViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle, private val accountUseCase: AccountUseCase
 ) : ViewModel() {
 

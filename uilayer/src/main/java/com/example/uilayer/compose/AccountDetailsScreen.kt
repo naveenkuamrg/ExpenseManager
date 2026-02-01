@@ -4,10 +4,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.uilayer.navigation.Screen
 
-import com.example.uilayer.viewmodel.AccountPageViewModel
+import com.example.uilayer.viewmodel.AccountViewModel
 
 @Composable
 fun AccountScreen(navController: NavController) {
@@ -29,7 +30,7 @@ fun AccountScreen(navController: NavController) {
 @Composable
 fun AccountDetailScreen(
     onBack: () -> Unit,
-    viewModel: AccountPageViewModel
+    viewModel: AccountViewModel =  hiltViewModel()
 ) {
     Column {
         Text(text = "Account ID: ${viewModel.accountId}")

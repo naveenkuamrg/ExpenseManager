@@ -1,13 +1,13 @@
 package com.example.domainlayer.usecase
 
 import com.example.domain.module.module.ExpenseTracker
-import com.example.domain.module.module.PaymentType
+import com.example.domain.module.module.TransactionType
 import com.example.domain.module.usecase.BaseUseCase
 import com.example.domain.module.usecase.Result
 import com.example.domainlayer.repository.ExpenseRecordRepository
 import javax.inject.Inject
 
-class ExpenseRecordUseCase @Inject constructor(val repository: ExpenseRecordRepository) :
+class ExpenseRecordUseCase @Inject constructor(private val repository: ExpenseRecordRepository) :
     BaseUseCase<ExpenseTracker, ExpenseRecordAction>() {
     override suspend fun executeBackground(params: ExpenseRecordAction): Result<ExpenseTracker> {
         return when (params) {
@@ -26,7 +26,7 @@ class ExpenseRecordUseCase @Inject constructor(val repository: ExpenseRecordRepo
                         note = note,
                         accountId = params.accountId,
                         contactId = params.contactId,
-                        paymentType = params.paymentType
+                        transactionType = params.transactionType
                     )
                 )
             }
@@ -64,7 +64,7 @@ class ExpenseRecordUseCase @Inject constructor(val repository: ExpenseRecordRepo
             }
 
             is ExpenseRecordAction.UpdatePaymentType -> {
-                repository.updatePaymentType(params.id, params.paymentType)
+                repository.updatePaymentType(params.id, params.transactionType)
             }
         }
     }
@@ -74,12 +74,11 @@ class ExpenseRecordUseCase @Inject constructor(val repository: ExpenseRecordRepo
 sealed class ExpenseRecordAction {
     data class Get(val id: String) : ExpenseRecordAction()
     data class Create(
-        val name: String,
         val amount: Double,
         val note: String?,
         val accountId: String,
         val contactId: String?,
-        val paymentType: PaymentType
+        val transactionType: TransactionType
     ) : ExpenseRecordAction()
 
     data class Delete(val id: String) : ExpenseRecordAction()
@@ -89,7 +88,7 @@ sealed class ExpenseRecordAction {
     data class UpdateNote(val id: String, val note: String?) : ExpenseRecordAction()
     data class UpdateAccount(val id: String, val accountId: String) : ExpenseRecordAction()
     data class UpdateContact(val id: String, val contactId: String?) : ExpenseRecordAction()
-    data class UpdatePaymentType(val id: String, val paymentType: PaymentType) :
+    data class UpdatePaymentType(val id: String, val transactionType: TransactionType) :
         ExpenseRecordAction()
 }
 

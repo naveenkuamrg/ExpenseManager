@@ -2,11 +2,10 @@ package com.example.datalayer.repository.repositoryImp
 
 import com.example.datalayer.repository.ResultWrapper
 import com.example.datalayer.repository.roomdatabase.dao.ExpenseTrackerDAO
-import com.example.datalayer.repository.roomdatabase.entities.ExpenseTrackerRecord
 import com.example.datalayer.repository.roomdatabase.entities.toDomain
 import com.example.datalayer.repository.roomdatabase.entities.toEntity
 import com.example.domain.module.module.ExpenseTracker
-import com.example.domain.module.module.PaymentType
+import com.example.domain.module.module.TransactionType
 import com.example.domain.module.usecase.Result
 import com.example.domainlayer.repository.ExpenseRecordRepository
 import javax.inject.Inject
@@ -91,7 +90,7 @@ class ExpenseRecordRepositoryImp @Inject constructor(val expenseTrackerDAO: Expe
 
     override suspend fun updatePaymentType(
         id: String,
-        paymentType: PaymentType
+        transactionType: TransactionType
     ): Result<ExpenseTracker> {
         TODO("Not yet implemented")
     }

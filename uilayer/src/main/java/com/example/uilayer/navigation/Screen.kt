@@ -18,6 +18,10 @@ sealed class Screen(val route: String) {
         fun route(id: String) = "account_detail/$id"
     }
 
+    object TrackerEdit: Screen("edit_tracker/{id}") {
+        fun route(id: String) = "edit_tracker/$id"
+    }
+
     object Settings : Screen("settings")
 
     object Profile: Screen("profile")
